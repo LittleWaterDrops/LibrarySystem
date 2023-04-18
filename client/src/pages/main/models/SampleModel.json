@@ -1,0 +1,22 @@
+[
+  {
+    "receiptDate": "2022-02-11",
+    "usageList": ["식권 대체"],
+    "paymentPlace": "그린푸드",
+    "content": "야근 식대",
+    "paidAmount": 300000,
+    "payer": ["상한규"],
+    "attendants": ["상한규", "박윤도"],
+    "isProved": true
+  },
+  {
+    "receiptDate": "2022-02-21",
+    "usageList": ["식권 대체"],
+    "paymentPlace": "그린푸드",
+    "content": "점심 식대",
+    "paidAmount": 302000,
+    "payer": ["박윤도"],
+    "attendants": ["우승태", "박윤도"],
+    "isProved": true
+  }
+]

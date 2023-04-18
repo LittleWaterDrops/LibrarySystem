@@ -1,0 +1,75 @@
+@import url(../../../design_system/Colors.module.css);
+
+.menu-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.text-icon-field {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.menu {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  align-self: flex-start;
+  transition: opacity 0.2s ease;
+}
+
+.menu-active {
+  width: 16.5em;
+  height: 10em;
+  margin-left: 4px;
+  box-shadow: none;
+  border-top: 1px solid rgb(209, 209, 209);
+  margin-top: 5px;
+  opacity: 1;
+  visibility: visible;
+  overflow: auto;
+  transition: opacity 0.2s ease;
+}
+
+.menuNonTextField {
+  overflow: auto;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  align-self: flex-start;
+  transition: opacity 0.2s ease;
+}
+
+.menuNonTextField-active {
+  position: absolute;
+  width: 4em;
+  height: 2.5em;
+  margin-left: 40px;
+  margin-top: -40px;
+  box-shadow: none;
+  border: 1px solid rgb(209, 209, 209);
+  opacity: 1;
+  visibility: visible;
+  overflow: auto;
+  transition: opacity 0.2s ease;
+}
+
+.menu-item {
+  font-size: 14px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  text-align: center;
+  justify-content: center;
+  padding: 3px;
+  background-color: white;
+}
+.menu-item-hovered {
+  font-size: 14px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  text-align: center;
+  justify-content: center;
+  padding: 3px;
+  background-color: var(--primary-color);
+  color: white;
+}

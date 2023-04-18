@@ -1,0 +1,124 @@
+@import url(../../../design_system/Colors.module.css);
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-left: -2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.subContainer {
+  display: flex;
+  flex: 0.3;
+  flex-direction: column;
+  background-color: var(--primary-color);
+}
+
+.mainContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.nonInitContainer {
+  opacity: 0;
+}
+
+.welcomeText {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding-top: 12rem;
+  padding-bottom: 0.5rem;
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 12px;
+  color: var(--title-color);
+  border: 0px solid var(--line-color);
+  border-bottom-width: 1px;
+  transition: opacity 400ms;
+}
+
+.textField {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  border: 0px solid var(--line-color);
+  border-bottom-width: 1px;
+}
+
+.informationText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+  font-size: 2rem;
+  font-weight: lighter;
+  transition: opacity 400ms;
+}
+
+.paidAmountText {
+  padding: 0px;
+  margin: 0px;
+  margin-right: 8px;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: var(--primary-color);
+  transition: opacity 400ms;
+  transition-delay: 400ms;
+}
+
+.linkText {
+  padding: 0px;
+  margin: 0px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: normal;
+  text-decoration: none;
+  border: 0px;
+
+  color: var(--primary-color);
+  background-color: white;
+  transition: opacity 400ms;
+  transition-delay: 800ms;
+}
+
+.linkTextHovered {
+  padding: 0px;
+  margin: 0px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: normal;
+  text-decoration: none;
+  border: 0px;
+
+  color: var(--sub-primary-color);
+  background-color: white;
+}
+
+.footer {
+  width: 100%;
+  justify-content: baseline;
+  height: 100px;
+  background-color: black;
+}
+
+.copywriteText {
+  text-align: end;
+  /* font-size: 2rem; */
+  font-weight: lighter;
+  color: whitesmoke;
+}

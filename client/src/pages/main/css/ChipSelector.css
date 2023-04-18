@@ -1,0 +1,36 @@
+.menu-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.title-container {
+  display: flex;
+  width: 35em;
+  justify-content: space-between;
+}
+
+.chip-container {
+  width: 35em;
+  margin-top: 5px;
+}
+
+.sub-text {
+  font-size: medium;
+  width: 35em;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+  margin-top: -5px;
+  padding-bottom: 5px;
+  color: grey;
+}
+
+.sub-text-selected {
+  font-size: medium;
+  width: 35em;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+  margin-top: -5px;
+  padding-bottom: 5px;
+  color: black;
+}
