@@ -1,9 +1,9 @@
 import axios from "axios"
 import SERVER_CONFIG from "../../../config"
-import { ReceiptModel } from "./../../../pages/main/models/ReceiptModel"
+import { BookModel } from "../models/BookModel"
 
 export type updateCardDataProps = {
-  submitData: ReceiptModel
+  submitData: BookModel
   dataNumber: number
 }
 // 멤버 리스트 관련
@@ -17,7 +17,7 @@ export async function getUsageList() {
 }
 
 // 전체 데이터 관련
-export async function insertCardUseData(resultData: ReceiptModel) {
+export async function insertCardUseData(resultData: BookModel) {
   return await axios.post(`${SERVER_CONFIG.URL}/home/insertCardUseData`, resultData)
 }
 

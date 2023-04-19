@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 import { deleteCardUseDataWithNumber, getCardUseData, downloadXSLX } from "../api/API"
 import Button from "../components/Button"
 import Table from "../components/Table"
-import { CardUseDataModel } from "../models/CardUseDataModel"
 import Popup from "../components/Popup"
 import "reactjs-popup/dist/index.css"
 import styles from "../css/ManagementScreen.module.css"
+import { BookListModel } from "../models/BookListModel"
 
-const initialData: CardUseDataModel = {} as CardUseDataModel
+const initialData: BookListModel = {} as BookListModel
 const LAST_MONTH = new Date().getMonth() !== 0 ? new Date().getMonth() : 12
 
 // 오브젝트가 비어있음을 확인

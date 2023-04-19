@@ -1,4 +1,3 @@
-import { CardUseDataModel } from "../models/CardUseDataModel"
 import { useTable } from "react-table"
 import { useMemo, useState } from "react"
 import "../css/Table.css"
@@ -7,9 +6,10 @@ import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+import { BookListModel } from "../models/BookListModel"
 
 type TableProps = {
-  items: CardUseDataModel[]
+  items: BookListModel[]
   getSelectedNumber: (selectedNumber: number) => void
 }
 
@@ -20,32 +20,28 @@ const COLUMNS = [
     accessor: "No",
   },
   {
-    Header: "일자",
-    accessor: "일자",
+    Header: "일련번호",
+    accessor: "일련번호",
   },
   {
-    Header: "구분",
-    accessor: "구분",
+    Header: "도서명",
+    accessor: "도서명",
   },
   {
-    Header: "사용처",
-    accessor: "사용처",
+    Header: "저자",
+    accessor: "저자",
   },
   {
-    Header: "내용",
-    accessor: "내용",
+    Header: "출판사",
+    accessor: "출판사",
   },
   {
-    Header: "금액",
-    accessor: "금액",
+    Header: "대출가능여부",
+    accessor: "대출가능여부",
   },
   {
-    Header: "사용자",
-    accessor: "사용자",
-  },
-  {
-    Header: "비고",
-    accessor: "비고",
+    Header: "대출인",
+    accessor: "대출인",
   },
 ]
 

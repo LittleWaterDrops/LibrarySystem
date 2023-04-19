@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 type TextInputProps = {
   title: string
   initialText: string
-  inputType?: React.HTMLInputTypeAttribute | undefined
+  inputType?: React.HTMLInputTypeAttribute | "serial" | undefined
   returnValue: (text: string) => void
 }
 
@@ -41,6 +41,14 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
     if (inputType === "number") {
       // 금액에 콤마 표기
       result = text.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    } else if (inputType === "serial") {
+      // 금액에 콤마 표기
+      result = text
+        .replace(/[^0-9]/g, "")
+        .replace(
+          /([0-9]{3})([0-9]{2})([0-9]{5})([0-9]{2})([0-9]{1})([0-9]{5})/g,
+          "$1-$2-$3-$4-$5 $6"
+        )
     }
     return result
   }
@@ -48,7 +56,9 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
   return (
     <div>
       <h3>{title}</h3>
+      {inputType === "serial" && <td>*IBSN 표기에 맞는 18자리 숫자를 기입하시오.</td>}
       <input
+        maxLength={inputType === "serial" ? 18 : undefined}
         type={inputType === "password" ? "password" : ""}
         ref={inputRef}
         value={inputValue(text)}

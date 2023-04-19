@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { SetStateAction, useEffect, useState } from "react"
+import { Link, To } from "react-router-dom"
 import { getSumPaidAmount, getUsageList } from "../api/API"
 import Button from "../components/Button"
 import DropDown from "../components/DropDown"
 import styles from "../css/MainScreen.module.css"
 
+interface LinkButtonProps {
+  linkTo: To
+  title: string
+  isInit: boolean
+}
+
 function MainScreen() {
   const [addDataHovered, setAddDataHovered] = useState(false)
   const [manageHovered, setManageHovered] = useState(false)
+  const [checkAndReturnHovered, setCheckAndReturnHovered] = useState(false)
   const [sumPaidAmount, setSumPaidAmount] = useState("")
   const [usage, setUsage] = useState([""])
   const [currentUsage, setCurrentUsage] = useState("전체")
@@ -45,7 +52,7 @@ function MainScreen() {
         <div className={styles.mainContainer}>
           <div className={isInit ? styles.welcomeText : styles.nonInitContainer}>환영합니다!</div>
           <div className={isInit ? styles.informationText : styles.nonInitContainer}>
-            {currentUsage === "전체" ? "이번 달은 현재까지" : `${currentUsage}는(은) 현재까지`}
+            {currentUsage === "전체" ? "감귤 도서관에는" : `${currentUsage}는(은) 현재까지`}
             <DropDown
               title="구분"
               initialText={""}
@@ -60,47 +67,39 @@ function MainScreen() {
               {sumPaidAmount}
             </div>
             <div className={isInit ? styles.informationText : styles.nonInitContainer}>
-              {"원 사용했어요!"}
+              {"개의 도서가 있어요!"}
             </div>
           </div>
-          <Link to="/addData" style={{ textDecoration: "none" }}>
-            <Button
-              text={"📋 데이터 추가 페이지"}
-              className={
-                isInit
-                  ? addDataHovered
-                    ? styles.linkTextHovered
-                    : styles.linkText
-                  : styles.nonInitContainer
-              }
-              onClicked={() => {}}
-              onHovered={(isHovered: boolean) => {
-                setAddDataHovered(isHovered)
-              }}
-            />
-          </Link>
-          <Link to="/manage" style={{ textDecoration: "none" }}>
-            <Button
-              text={"📁 데이터 관리 페이지"}
-              className={
-                isInit
-                  ? manageHovered
-                    ? styles.linkTextHovered
-                    : styles.linkText
-                  : styles.nonInitContainer
-              }
-              onClicked={() => {}}
-              onHovered={(isHovered: boolean) => {
-                setManageHovered(isHovered)
-              }}
-            />
-          </Link>
+          <LinkButton linkTo={"/addData"} title={"📘 도서 추가"} isInit={isInit} />
+          <LinkButton linkTo={"/manage"} title={"📚 도서 목록 조회"} isInit={isInit} />
+          <LinkButton linkTo={"/addData"} title={"🗳 도서 대출 및 반납"} isInit={isInit} />
         </div>
       </div>
       <div className={styles.footer}>
-        <div className={styles.copywriteText}>copywrite by Sang, Dangamsoft. 2022.02.</div>
+        <div className={styles.copywriteText}>copywrite by Sang, ZICOBA. 2023.04.</div>
       </div>
     </div>
+  )
+}
+
+// 링크 버튼
+const LinkButton = (props: LinkButtonProps) => {
+  const { linkTo, title, isInit } = props
+
+  const [isHovered, setIsHovered] = useState(false)
+  return (
+    <Link to={linkTo} style={{ textDecoration: "none" }}>
+      <Button
+        text={title}
+        className={
+          isInit ? (isHovered ? styles.linkTextHovered : styles.linkText) : styles.nonInitContainer
+        }
+        onClicked={() => {}}
+        onHovered={(isHovered: boolean) => {
+          setIsHovered(isHovered)
+        }}
+      />
+    </Link>
   )
 }
 

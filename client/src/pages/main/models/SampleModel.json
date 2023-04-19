@@ -1,22 +1,122 @@
 [
   {
-    "receiptDate": "2022-02-11",
-    "usageList": ["식권 대체"],
-    "paymentPlace": "그린푸드",
-    "content": "야근 식대",
-    "paidAmount": 300000,
-    "payer": ["상한규"],
-    "attendants": ["상한규", "박윤도"],
-    "isProved": true
+    "serialNumber": "000-00-00000-00-0 00000",
+    "title": "공정하다는 착각",
+    "author": "마이클 샌델",
+    "publisher": "와이즈베리",
+    "canBorrow": true,
+    "whoBorrow": ""
   },
   {
-    "receiptDate": "2022-02-21",
-    "usageList": ["식권 대체"],
-    "paymentPlace": "그린푸드",
-    "content": "점심 식대",
-    "paidAmount": 302000,
-    "payer": ["박윤도"],
-    "attendants": ["우승태", "박윤도"],
-    "isProved": true
+    "serialNumber": "000-00-00000-00-0 00001",
+    "title": "사피엔스",
+    "author": "유발 하라리",
+    "publisher": "와이즈베리",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00002",
+    "title": "총, 균, 쇠",
+    "author": "재레드 다이아몬드",
+    "publisher": "문학사상",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00003",
+    "title": "데일 카네기 인간관계론",
+    "author": "데일 카네기",
+    "publisher": "현대지성",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00004",
+    "title": "그릿",
+    "author": "앤절라 더크워스",
+    "publisher": "비즈니스북스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00005",
+    "title": "원씽",
+    "author": "게리 켈러",
+    "publisher": "비즈니스북스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00006",
+    "title": "트렌드 코리아 2023",
+    "author": "김난도, 전미영, 최지혜, 이수진, 권정윤",
+    "publisher": "미래의창",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00007",
+    "title": "마흔에 읽는 니체",
+    "author": "장재형",
+    "publisher": "유노북스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00008",
+    "title": "역행자",
+    "author": "자청",
+    "publisher": "웅진지식하우스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00009",
+    "title": "기분을 관리하면 인생이 관리된다",
+    "author": "김다슬",
+    "publisher": "클라우디아",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00010",
+    "title": "더 찬스",
+    "author": "김영익",
+    "publisher": "21세기북스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00011",
+    "title": "최재천의 공부",
+    "author": "최재천, 안희경",
+    "publisher": "김영사",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00012",
+    "title": "어서 오세요, 휴남동 서점입니다",
+    "author": "황보름",
+    "publisher": "클레이하우스",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00013",
+    "title": "망원동 브라더스",
+    "author": "김호연",
+    "publisher": "나무옆의자",
+    "canBorrow": true,
+    "whoBorrow": ""
+  },
+  {
+    "serialNumber": "000-00-00000-00-0 00014",
+    "title": "지구 끝의 온실",
+    "author": "김초엽",
+    "publisher": "자이언트북스",
+    "canBorrow": true,
+    "whoBorrow": ""
   }
 ]
