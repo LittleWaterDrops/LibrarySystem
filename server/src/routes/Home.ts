@@ -28,7 +28,7 @@ router.post("/insertBookData/", (request: Request, response: Response) => {
   ]
 
   DBConnection.query(
-    `INSERT INTO ${DBTables.BOOK_LIST} (일련번호,도서명,저자,출판사,대출가능여부) values(?)`,
+    `INSERT INTO ${DBTables.BOOK_LIST} (일련번호,도서명,저자,출판사,대출가능여부,대출인) values(?)`,
     (result?: any) => {
       response.send(result)
     },
