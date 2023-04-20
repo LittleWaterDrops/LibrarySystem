@@ -1,0 +1,91 @@
+@import url(../../../design_system/Colors.module.css);
+
+.filterField {
+  margin-left: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: rgba(199, 199, 199, 0.168);
+  text-align: center;
+}
+
+.filterField h2 {
+  font-weight: 600;
+  align-self: center;
+}
+.filterField h3 {
+  font-weight: 300;
+  font-size: medium;
+  align-self: center;
+}
+.filterField h4 {
+  font-weight: 200;
+  align-self: center;
+}
+
+.filterField > .headerField {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.filterField > .headerField > .button {
+  display: inline-block;
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 3px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  color: white;
+  background-color: var(--green);
+
+  font-size: 15px;
+
+  /* 글자 스크롤 방지 */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.filterField > .headerField > .buttonHovered {
+  display: inline-block;
+  border: 1px solid var(--pink);
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 3px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  color: white;
+  background-color: var(--pink);
+
+  font-size: 15px;
+
+  /* 글자 스크롤 방지 */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.filterField > .searchField {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* border-bottom: 1px solid var(--pink); */
+}

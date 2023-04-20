@@ -1,8 +1,7 @@
-import { SetStateAction, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, To } from "react-router-dom"
-import { getSumPaidAmount, getUsageList } from "../api/API"
+import { getSumBookAmount } from "../api/API"
 import Button from "../components/Button"
-import DropDown from "../components/DropDown"
 import styles from "../css/MainScreen.module.css"
 
 interface LinkButtonProps {
@@ -12,38 +11,15 @@ interface LinkButtonProps {
 }
 
 function MainScreen() {
-  const [addDataHovered, setAddDataHovered] = useState(false)
-  const [manageHovered, setManageHovered] = useState(false)
-  const [checkAndReturnHovered, setCheckAndReturnHovered] = useState(false)
-  const [sumPaidAmount, setSumPaidAmount] = useState("")
-  const [usage, setUsage] = useState([""])
-  const [currentUsage, setCurrentUsage] = useState("전체")
+  const [sumBookAmount, setSumBookAmount] = useState("")
   const [isInit, setIsInit] = useState(false)
 
   useEffect(() => {
-    // // 비고 리스트 초기화
-    // getUsageList().then((usageList) => {
-    //   let usageArray: string[] = []
-    //   for (const index in usageList) {
-    //     usageArray.push(usageList[index].usage)
-    //   }
-    //   setUsage(usageArray)
-    // })
-    // getSumPaidAmount(currentUsage).then((sumPaidAmount: number) => {
-    //   // 원화로 변환
-    //   const maskedAmount = sumPaidAmount.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    //   setSumPaidAmount(maskedAmount)
-    setIsInit(true)
-    // })
-  }, [])
-
-  useEffect(() => {
-    getSumPaidAmount(currentUsage).then((sumPaidAmount: number) => {
-      // 원화로 변환
-      const maskedAmount = sumPaidAmount.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-      setSumPaidAmount(maskedAmount)
+    getSumBookAmount().then((sumBookAmount: number) => {
+      setSumBookAmount(JSON.stringify(sumBookAmount))
+      setIsInit(true)
     })
-  }, [currentUsage])
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -52,19 +28,11 @@ function MainScreen() {
         <div className={styles.mainContainer}>
           <div className={isInit ? styles.welcomeText : styles.nonInitContainer}>환영합니다!</div>
           <div className={isInit ? styles.informationText : styles.nonInitContainer}>
-            {currentUsage === "전체" ? "감귤 도서관에는" : `${currentUsage}는(은) 현재까지`}
-            <DropDown
-              title="구분"
-              initialText={""}
-              memberList={["전체", ...usage]}
-              returnValue={(parameter) => setCurrentUsage(parameter[0])}
-              nonTextField
-            />
+            {"감귤 도서관에는"}
           </div>
-
           <div className={isInit ? styles.textField : styles.nonInitContainer}>
             <div className={isInit ? styles.paidAmountText : styles.nonInitContainer}>
-              {sumPaidAmount}
+              {sumBookAmount}
             </div>
             <div className={isInit ? styles.informationText : styles.nonInitContainer}>
               {"개의 도서가 있어요!"}
@@ -72,7 +40,7 @@ function MainScreen() {
           </div>
           <LinkButton linkTo={"/addData"} title={"📘 도서 추가"} isInit={isInit} />
           <LinkButton linkTo={"/manage"} title={"📚 도서 목록 조회"} isInit={isInit} />
-          <LinkButton linkTo={"/addData"} title={"🗳 도서 대출 및 반납"} isInit={isInit} />
+          <LinkButton linkTo={"/actionData"} title={"🗳 도서 대출 및 반납"} isInit={isInit} />
         </div>
       </div>
       <div className={styles.footer}>

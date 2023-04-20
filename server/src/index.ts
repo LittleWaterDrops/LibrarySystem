@@ -14,7 +14,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan("dev"))
 
-app.use(express.static(path.join(__dirname, "../../buildFile/build")))
+// app.use(express.static(path.join(__dirname, "../../buildFile/build")))
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}! \n`)

@@ -19,10 +19,10 @@ const COLUMNS = [
     Header: "No",
     accessor: "No",
   },
-  {
-    Header: "일련번호",
-    accessor: "일련번호",
-  },
+  // {
+  //   Header: "일련번호",
+  //   accessor: "일련번호",
+  // },
   {
     Header: "도서명",
     accessor: "도서명",
@@ -39,10 +39,10 @@ const COLUMNS = [
     Header: "대출가능여부",
     accessor: "대출가능여부",
   },
-  {
-    Header: "대출인",
-    accessor: "대출인",
-  },
+  // {
+  //   Header: "대출인",
+  //   accessor: "대출인",
+  // },
 ]
 
 function Table({ items, getSelectedNumber }: TableProps) {

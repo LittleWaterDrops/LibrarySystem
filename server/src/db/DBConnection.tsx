@@ -33,7 +33,7 @@ const DBControl = {
   query: (query: string, callback: any, value?: any) => {
     const createConnection: mysql.Connection = mysql.createConnection({
       host: currentEnv.DB_HOST,
-      port: parseInt(currentEnv.DB_PASSWORD || ""),
+      port: parseInt(currentEnv.DB_PORT || ""),
       user: currentEnv.DB_USER,
       password: currentEnv.DB_PASSWORD,
       database: currentEnv.DB_DATABASE,

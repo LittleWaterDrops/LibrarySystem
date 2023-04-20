@@ -9,7 +9,7 @@ function ToggleButton({ onClicked }: TextInputProps) {
   const [isTrue, setIsTrue] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
 
-  const text = isTrue ? "증빙 완료" : "증빙 안함"
+  const text = isTrue ? "대출 가능" : "대출 불가"
 
   const buttonClicked = () => {
     setIsTrue(!isTrue)
@@ -17,7 +17,7 @@ function ToggleButton({ onClicked }: TextInputProps) {
   }
   return (
     <div>
-      <h3>증빙여부</h3>
+      <h3>대출 가능 여부</h3>
       <div
         className={
           isTrue

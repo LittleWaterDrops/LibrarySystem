@@ -3,21 +3,19 @@ import Button from "../components/Button"
 import TextInput from "../components/TextInput"
 import "react-calendar/dist/Calendar.css"
 import {
-  getCardUseDataByNumber,
-  getMemberList,
-  getUsageList,
-  insertCardUseData,
+  getBookListDataByNumber,
+  insertBookData,
   updateCardDataProps,
-  updateCardUseDataWithNumber,
+  updateBookDataWithNumber,
 } from "../api/API"
 import { Link, Params, useParams } from "react-router-dom"
 import { isEmpty } from "./ManagementScreen"
 import styles from "../css/AddDataScreen.module.css"
 import Popup from "../components/Popup"
 import { BookListModel } from "../models/BookListModel"
-import { Convert, BookModel } from "../models/BookModel"
+import { BookModel } from "../models/BookModel"
 
-const SERIAL_NUMBER_LENGTH = 18
+export const SERIAL_NUMBER_LENGTH = 18
 
 const initialData: BookModel = { canBorrow: true, whoBorrow: "" } as BookModel
 
@@ -30,7 +28,7 @@ function AddDataScreen() {
   useEffect(() => {
     //수정 화면에서 변수가 넘어왔을 경우, 화면 컴포넌트의 초깃값 정의
     if (routerParameter.dataNumber && isInit === false) {
-      getCardUseDataByNumber(routerParameter.dataNumber).then((dataInfo: BookListModel[]) => {
+      getBookListDataByNumber(routerParameter.dataNumber).then((dataInfo: BookListModel[]) => {
         const dataByNumber = dataInfo[0]
 
         const data: BookModel = {
@@ -63,6 +61,13 @@ function AddDataScreen() {
             initialText={routerParameter.dataNumber ? JSON.stringify(bookData.serialNumber) : ""}
             inputType={"serial"}
             returnValue={(parameter) => {
+              const formatedNumber = parameter
+                .replace(/[^0-9]/g, "")
+                .replace(
+                  /([0-9]{3})([0-9]{2})([0-9]{5})([0-9]{2})([0-9]{1})([0-9]{5})/g,
+                  "$1-$2-$3-$4-$5 $6"
+                )
+
               setBookData({ ...bookData, serialNumber: parameter })
             }}
           />
@@ -100,7 +105,7 @@ function AddDataScreen() {
                 SubmitData(bookData, routerParameter)
                 window.location.replace("/manage")
               }}
-            ></Popup>
+            />
           ) : (
             <Button
               text="등록"
@@ -118,21 +123,18 @@ function AddDataScreen() {
 
   function SubmitData(dataToSubmit: BookModel, routerParameter: Readonly<Params<string>>) {
     try {
-      // Convert.bookModelToJson([dataToSubmit])
-
       // 새로 추가하는 데이터인 경우
       if (isEmpty(routerParameter)) {
-        insertCardUseData(dataToSubmit)
+        insertBookData(dataToSubmit)
       }
-      // 수정하는 데이터인 경우
-      else {
-        const resultData: updateCardDataProps = {
-          submitData: dataToSubmit,
-          dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
-        }
-
-        updateCardUseDataWithNumber(resultData)
-      }
+      // // 수정하는 데이터인 경우
+      // else {
+      //   const resultData: updateCardDataProps = {
+      //     submitData: dataToSubmit,
+      //     dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
+      //   }
+      //   updateCardUseDataWithNumber(resultData)
+      // }
     } catch (e: any) {}
   }
 
@@ -144,8 +146,6 @@ function AddDataScreen() {
         dataToSubmit.publisher !== "" &&
         dataToSubmit.title !== ""
       ) {
-        // Convert.bookModelToJson([dataToSubmit])
-
         setValidation(true)
       } else {
         setValidation(false)

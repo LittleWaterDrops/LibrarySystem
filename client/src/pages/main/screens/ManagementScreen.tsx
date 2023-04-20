@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { deleteCardUseDataWithNumber, getCardUseData, downloadXSLX } from "../api/API"
+import { deleteBookDataWithNumber, getBookListData } from "../api/API"
 import Button from "../components/Button"
 import Table from "../components/Table"
 import Popup from "../components/Popup"
 import "reactjs-popup/dist/index.css"
 import styles from "../css/ManagementScreen.module.css"
 import { BookListModel } from "../models/BookListModel"
+import FilterField from "../components/FilterField"
+import { BookModel } from "../models/BookModel"
 
 const initialData: BookListModel = {} as BookListModel
-const LAST_MONTH = new Date().getMonth() !== 0 ? new Date().getMonth() : 12
 
 // 오브젝트가 비어있음을 확인
 export const isEmpty = (object: any) => {
@@ -27,9 +28,7 @@ function ManagementScreen() {
 
   // 카드 사용 내역 데이터 호출
   useEffect(() => {
-    getCardUseData().then((cardUseData) => {
-      console.log(cardUseData)
-
+    getBookListData().then((cardUseData) => {
       setCardUseData(cardUseData)
       setIsInit(true)
     })
@@ -37,13 +36,18 @@ function ManagementScreen() {
 
   // 데이터 삭제 함수
   const dataDelete = () => {
-    console.log("delete" + selectedNumber)
-    deleteCardUseDataWithNumber(selectedNumber)
+    // deleteCardUseDataWithNumber(selectedNumber)
     setIsInit(false)
   }
 
   return (
     <div>
+      <FilterField
+        submitFilterButton={(parameter: BookModel) => {
+          // TODO: search filter
+          // console.log(parameter)
+        }}
+      />
       {isInit && (
         <>
           <Table
@@ -77,12 +81,6 @@ function ManagementScreen() {
                 dataDelete()
                 window.location.reload()
               }}
-            ></Popup>
-            <Button
-              text={"엑셀 파일 다운로드"}
-              className={styles.button}
-              onClicked={() => {}}
-              onHovered={function (isHovered: boolean): void {}}
             />
           </div>
         </>

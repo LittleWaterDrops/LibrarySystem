@@ -13,8 +13,9 @@ type HeaderComponentProps = {
 
 const headerRoutesPath: RoutesPathProps[] = [
   { pathName: "/", pathText: "홈" },
-  { pathName: "/addData", pathText: "데이터 추가" },
-  { pathName: "/manage", pathText: "데이터 관리" },
+  { pathName: "/addData", pathText: "도서 추가" },
+  { pathName: "/manage", pathText: "도서 관리" },
+  { pathName: "/actionData", pathText: "도서 대출/반납" },
 ]
 const HeaderComponent = ({ pathText }: HeaderComponentProps) => {
   const [textHovered, setTextHovered] = useState(false)
