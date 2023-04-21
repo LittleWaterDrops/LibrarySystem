@@ -6,23 +6,23 @@ import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import { BookListModel } from "../models/BookListModel"
+// import { BookListModel } from "../models/BookListModel"
 
 type TableProps = {
-  items: BookListModel[]
+  items: any[]
   getSelectedNumber: (selectedNumber: number) => void
 }
 
 // 테이블 헤더 정의
 const COLUMNS = [
   {
-    Header: "No",
+    Header: "ID",
     accessor: "No",
   },
-  // {
-  //   Header: "일련번호",
-  //   accessor: "일련번호",
-  // },
+  {
+    Header: "일련번호",
+    accessor: "일련번호",
+  },
   {
     Header: "도서명",
     accessor: "도서명",
@@ -39,15 +39,25 @@ const COLUMNS = [
     Header: "대출가능여부",
     accessor: "대출가능여부",
   },
-  // {
-  //   Header: "대출인",
-  //   accessor: "대출인",
-  // },
 ]
 
 function Table({ items, getSelectedNumber }: TableProps) {
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => items, [])
+  const data = useMemo(() => {
+    items.findIndex((value, index) => {
+      items[index].일련번호 = items[index].일련번호.replace(
+        /([0-9]{3})([0-9]{2})([0-9]{5})([0-9]{2})([0-9]{1})([0-9]{5})/g,
+        "$1-$2-$3-$4-$5 $6"
+      )
+      if (JSON.stringify(value.대출가능여부) === "1") {
+        items[index].대출가능여부 = "가능"
+      } else if (JSON.stringify(value.대출가능여부) === "0") {
+        items[index].대출가능여부 = "불가능"
+      }
+    })
+
+    return items
+  }, [items])
 
   const [selectedIndex, setSelectedIndex] = useState(Number)
 

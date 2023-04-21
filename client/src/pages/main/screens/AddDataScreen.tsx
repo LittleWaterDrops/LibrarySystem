@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css"
 import {
   getBookListDataByNumber,
   insertBookData,
-  updateCardDataProps,
+  updateBookDataProps,
   updateBookDataWithNumber,
 } from "../api/API"
 import { Link, Params, useParams } from "react-router-dom"
@@ -127,14 +127,14 @@ function AddDataScreen() {
       if (isEmpty(routerParameter)) {
         insertBookData(dataToSubmit)
       }
-      // // 수정하는 데이터인 경우
-      // else {
-      //   const resultData: updateCardDataProps = {
-      //     submitData: dataToSubmit,
-      //     dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
-      //   }
-      //   updateCardUseDataWithNumber(resultData)
-      // }
+      // 수정하는 데이터인 경우
+      else {
+        const resultData: updateBookDataProps = {
+          submitData: dataToSubmit,
+          dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
+        }
+        updateBookDataWithNumber(resultData)
+      }
     } catch (e: any) {}
   }
 

@@ -1,8 +1,7 @@
-import { updateCardDataProps } from "./../../../client/src/pages/main/api/API"
+import { updateBookDataProps } from "./../../../client/src/pages/main/api/API"
 import express, { Request, Response } from "express"
 import DBConnection from "../db/DBConnection"
 import DBTables from "../db/DBTables"
-import { spawn } from "child_process"
 
 const router = express.Router()
 
@@ -11,6 +10,7 @@ router.get("/getBookListData/", (request: Request, response: Response) => {
     response.send(result)
   })
 })
+
 router.get("/getBookListData/:dataNumber", (request: Request, response: Response) => {
   DBConnection.query(
     `SELECT * FROM ${DBTables.BOOK_LIST} WHERE NO = ${request.params.dataNumber}`,
@@ -20,47 +20,39 @@ router.get("/getBookListData/:dataNumber", (request: Request, response: Response
   )
 })
 
-// 안 쓰는 듯
-// router.get("/getBookListDataByNumber/", (request: Request, response: Response) => {
-//   DBConnection.query(
-//     `SELECT * FROM ${DBTables.BOOK_LIST} WHERE NO = ${request}`,
-//     (result?: any) => {
-//       response.send(result)
-//     }
-//   )
-// })
+router.post("/deleteBookDataWithNumber/", (request: Request, response: Response) => {
+  const result = [1]
 
-// router.post("/deleteCardUseDataWithNumber/", (request: Request, response: Response) => {
-//   DBConnection.query(
-//     `DELETE FROM ${DBTables.USE_DATA} WHERE No = ${request.body.deleteNumber}`,
-//     (result?: any) => {
-//       response.send(result)
-//     }
-//   )
-// })
+  DBConnection.query(
+    `DELETE FROM ${DBTables.BOOK_LIST} WHERE No = ${request.body.deleteNumber}`,
+    (result?: any) => {
+      response.send(result)
+    },
+    result
+  )
+})
 
-// router.post("/updateCardUseDataWithNumber/", (request: Request, response: Response) => {
-//   const requestBody: updateCardDataProps = request.body.resultData
+router.post("/updateBookDataWithNumber/", (request: Request, response: Response) => {
+  const requestBody: updateBookDataProps = request.body.resultData
 
-//   const result = [
-//     requestBody.submitData.receiptDate,
-//     requestBody.submitData.usageList[0],
-//     requestBody.submitData.paymentPlace,
-//     requestBody.submitData.content,
-//     requestBody.submitData.paidAmount,
-//     requestBody.submitData.payer[0],
-//     requestBody.submitData.attendants.join(),
-//     requestBody.dataNumber,
-//   ]
+  const result = [
+    requestBody.submitData.serialNumber,
+    requestBody.submitData.title,
+    requestBody.submitData.author,
+    requestBody.submitData.publisher,
+    requestBody.submitData.canBorrow,
+    requestBody.submitData.whoBorrow,
+    requestBody.dataNumber,
+  ]
 
-//   DBConnection.query(
-//     `UPDATE ${DBTables.USE_DATA} SET 일자 = ?, 구분 = ?, 사용처 = ?, 내용 = ?, 금액 = ?, 사용자 = ?, 비고 = ? WHERE No = ?`,
-//     (result?: any) => {
-//       response.send(result)
-//     },
-//     result
-//   )
-// })
+  DBConnection.query(
+    `UPDATE ${DBTables.BOOK_LIST} SET 일련번호 = ?, 도서명 = ?, 저자 = ?, 출판사 = ?, 대출가능여부 = ?, 대출인 = ? WHERE No = ?`,
+    (result?: any) => {
+      response.send(result)
+    },
+    result
+  )
+})
 
 router.get("/getSumBookAmount/", (request: Request, response: Response) => {
   DBConnection.query(`SELECT COUNT(도서명) FROM ${DBTables.BOOK_LIST}`, (result?: any) => {
@@ -68,6 +60,60 @@ router.get("/getSumBookAmount/", (request: Request, response: Response) => {
 
     response.send(bookAmount[0] ? bookAmount : [0])
   })
+})
+
+router.post("/checkBorrowState/", (request: Request, response: Response) => {
+  DBConnection.query(
+    `SELECT * FROM ${DBTables.BOOK_LIST} WHERE 일련번호 = ${request.body.serialNumber}`,
+    (result?: any) => {
+      response.send(result)
+    }
+  )
+})
+
+router.post("/borrowBook/", (request: Request, response: Response) => {
+  const requestBody = request.body
+
+  const result = [requestBody.canBorrow, requestBody.whoBorrow, requestBody.serialNumber]
+
+  DBConnection.query(
+    `UPDATE ${DBTables.BOOK_LIST} SET 대출가능여부 = ?, 대출인 = ? WHERE 일련번호 = ?`,
+    (result?: any) => {
+      response.send(result)
+    },
+    result
+  )
+})
+
+router.post("/getFilteredBookListData/", (request: Request, response: Response) => {
+  const requestBody: any = request.body
+
+  const result = [
+    requestBody.title,
+    requestBody.author,
+    requestBody.publisher,
+    requestBody.canBorrow,
+  ]
+
+  const resultColumn = ["도서명", "저자", "출판사", "대출가능여부"]
+
+  let query = `SELECT * FROM ${DBTables.BOOK_LIST} WHERE `
+  let notEmptyResult = []
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i] !== "") {
+      notEmptyResult.push(i < result.length - 1 ? `%${result[i]}%` : result[i])
+      query = query.concat(`${resultColumn[i]} ${i < result.length - 1 ? " LIKE ? AND " : " = ?"}`)
+    }
+  }
+
+  DBConnection.query(
+    query,
+    (result?: any) => {
+      response.send(result)
+    },
+    notEmptyResult
+  )
 })
 
 export default router

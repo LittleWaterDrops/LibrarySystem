@@ -2,7 +2,7 @@ import axios from "axios"
 import SERVER_CONFIG from "../../../config"
 import { BookModel } from "../models/BookModel"
 
-export type updateCardDataProps = {
+export type updateBookDataProps = {
   submitData: BookModel
   dataNumber: number
 }
@@ -20,7 +20,7 @@ export async function insertBookData(resultData: BookModel) {
   return await axios.post(`${SERVER_CONFIG.URL}/home/insertBookData`, resultData)
 }
 
-export async function updateBookDataWithNumber(resultData: updateCardDataProps) {
+export async function updateBookDataWithNumber(resultData: updateBookDataProps) {
   return await axios.post(`${SERVER_CONFIG.URL}/management/updateBookDataWithNumber`, {
     resultData,
   })
@@ -34,4 +34,25 @@ export async function deleteBookDataWithNumber(deleteNumber: number) {
 
 export async function getSumBookAmount() {
   return (await axios.get(`${SERVER_CONFIG.URL}/management/getSumBookAmount`)).data[0]
+}
+
+export async function checkBorrowState(serialNumber: string) {
+  return (
+    await axios.post(`${SERVER_CONFIG.URL}/management/checkBorrowState`, {
+      serialNumber: serialNumber,
+    })
+  ).data
+}
+
+export async function borrowBook(canBorrow: boolean, whoBorrow: string, serialNumber: string) {
+  return await axios.post(`${SERVER_CONFIG.URL}/management/borrowBook`, {
+    canBorrow: canBorrow,
+    whoBorrow: whoBorrow,
+    serialNumber: serialNumber,
+  })
+}
+
+export async function getFilteredBookListData(submitData: any) {
+  return (await axios.post(`${SERVER_CONFIG.URL}/management/getFilteredBookListData`, submitData))
+    .data
 }
